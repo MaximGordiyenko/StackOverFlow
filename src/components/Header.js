@@ -5,11 +5,11 @@ const Header = () => {
   const [order, setOrder] = useState({ value: 'desc' });
   const [sort, setSort] = useState({ value: 'activity' });
   const [open, setOpen] = useState(false)
-  
+  console.log(sort, order);
   return (
     <header className={`page-header`}>
       
-      <button onClick={() => setOpen(!open)}>Show Options</button>
+      <button onClick={() => setOpen(!open)}>Filter</button>
       <Modal open={open} onClose={() => setOpen(false)}>
         <label htmlFor="order-select">Order:</label>
         <select id="order-select" onChange={event => setOrder({ value: event.target.value })} defaultValue={order.value}>
