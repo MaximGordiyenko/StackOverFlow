@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
 import Pagination from "react-js-pagination";
 import useRequest from "../Hooks/useRequest";
+import { useSelector } from 'react-redux'
 
 require('dotenv').config();
 
-const Main = () => {
+const Main = ({order, setOrder, sort, setSort}) => {
   const forksPerPage = 5;
+  const [search, setSearch]= useState('js')
   const [activePage, setCurrentPage] = useState(1);
-  const { data, loading, error } = useRequest(`https://api.stackexchange.com/2.2/questions?fromdate=${"1605052800"}&todate=${"1605139200"}&order=desc&sort=activity&site=stackoverflow&key=${process.env.REACT_APP_SOFkey}`);
+  const { data, loading } = useRequest(`https://api.stackexchange.com/2.2/questions?fromdate=${"1605052800"}&todate=${"1605139200"}&order=${order.value}&sort=${sort.value}&tagged=${search}&site=stackoverflow&key=${process.env.REACT_APP_SOFkey}`);
   
   const indexOfLastPage = activePage * forksPerPage;
   const indexOfFirstPage = indexOfLastPage - forksPerPage;
   
-  console.log(data, loading, error);
-  
+  console.log(data, order, sort);
+  console.log(search);
   return (
     <main className={`page-main`}>
+      <header>
+        <label>
+          <input type="text" placeholder='search ...' onChange={e => setSearch(e.target.value)}/>
+        </label>
+      </header>
       {
         data.data.items &&
         Array.isArray(data.data.items) &&
@@ -38,7 +45,7 @@ const Main = () => {
       }
       
       <Pagination
-        totalItemsCount={30}
+        totalItemsCount={25}
         onChange={(pageNumber) => setCurrentPage(pageNumber)}
         activePage={activePage}
         innerClass={`pagination`}
