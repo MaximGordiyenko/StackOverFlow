@@ -6,7 +6,12 @@ const Input = ({setSearch}) => {
   const input = inputStyles()
   return (
     <form className={input.root} noValidate autoComplete="off">
-      <TextField id="standard-secondary" label="Standard secondary" color="secondary" placeholder='search ...' onChange={e => setSearch(e.target.value)}/>
+      <TextField id="standard-secondary"
+                 label="Search by tags"
+                 color="secondary"
+                 placeholder='example "java"'
+                 onChange={e => setSearch(e.target.value)}
+      />
     </form>
   );
 };
