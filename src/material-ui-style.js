@@ -14,12 +14,6 @@ export const cardsStyles = makeStyles((theme) => ({
   cover: {
     width: 151,
   },
-  controls: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
   subcontent: {
     paddingRight: 15,
   },

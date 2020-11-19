@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Card, CardContent, CardMedia, Grid, Link, Typography } from '@material-ui/core';
 import { cardsStyles, gridStyle } from "../material-ui-style";
+import { Assessment, PermContactCalendar, QuestionAnswer } from '@material-ui/icons';
+import DataContext from '../App';
 
 const Cards = ({ item }) => {
+  const f = useContext(DataContext);
+  console.log(f);
   const grid = gridStyle();
   const cards = cardsStyles();
   return (
@@ -13,16 +17,32 @@ const Cards = ({ item }) => {
             <div className={cards.details}>
               <CardContent className={cards.content}>
                 <Link href={item.link} target="_blank" rel="noreferrer">
-                  <Typography className={cards.title} color="textSecondary" gutterBottom>{item.title}</Typography>
-                  <Typography component="h5" variant="subtitle1">{item.owner.display_name}</Typography>
-                  <Typography variant="subtitle1" color="textSecondary">{item.owner.reputation}</Typography>
+                  <Typography className={cards.title}
+                              color="textSecondary"
+                              variant="h5"
+                              gutterBottom>
+                    {item.title}
+                  </Typography>
+                  <Typography component="span"
+                              variant="subtitle1">
+                    <PermContactCalendar/>
+                    <b>Name: </b>
+                    {item.owner.display_name}
+                    <Assessment/>
+                  </Typography>
+                  <Typography component="span" variant="subtitle1"
+                              color="textSecondary"><b>Reputation: </b>{item.owner.reputation}</Typography>
+                  
                   <div>{item.tags.map((tag, idx) => (
                     <span key={idx} className={cards.subcontent}>
+                      <QuestionAnswer/>
                         {tag}
                       </span>
                   ))}
                   </div>
                 </Link>
+                <time>from: {f}</time>
+                {/*<time>to: {selectedDateTo}</time>*/}
               </CardContent>
             </div>
             <CardMedia

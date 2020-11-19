@@ -54,7 +54,7 @@ const Mod = ({ onClose, open, order, setOrder, setSort, sort, selectedDateFrom, 
             margin="normal"
             id="date-picker-dialog"
             label="Date picker from"
-            format="MM/dd/yyyy"
+            format="yyyy-MM-dd"
             value={selectedDateFrom}
             onChange={date => setSelectedDateFrom(date)}
             KeyboardButtonProps={{
@@ -65,7 +65,7 @@ const Mod = ({ onClose, open, order, setOrder, setSort, sort, selectedDateFrom, 
             margin="normal"
             id="date-picker-dialog"
             label="Date picker to"
-            format="MM/dd/yyyy"
+            format="yyyy-MM-dd"
             value={selectedDateTo}
             onChange={date => setSelectedDateTo(date)}
             KeyboardButtonProps={{

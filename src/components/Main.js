@@ -3,18 +3,22 @@ import Pagination from "react-js-pagination";
 import useRequest from "../Hooks/useRequest";
 import Cards from "./Cards";
 import Input from "./Input";
-
 require('dotenv').config();
 
 const Main = ({ order, sort, selectedDateFrom, selectedDateTo }) => {
   const forksPerPage = 25;
   const [search, setSearch] = useState('js');
   const [activePage, setCurrentPage] = useState(1);
-  const { data, loading } = useRequest(`https://api.stackexchange.com/2.2/questions?fromdate=${"1605052800"}&todate=${"1605139200"}&order=${order.value}&sort=${sort.value}&tagged=${search}&site=stackoverflow&key=${process.env.REACT_APP_SOFkey}`);
+  const { data, loading } = useRequest(`https://api.stackexchange.com/2.2/questions?fromdate=${toTimestamp(selectedDateFrom)}&todate=${toTimestamp(selectedDateTo)}&order=${order.value}&sort=${sort.value}&tagged=${search}&site=stackoverflow&key=${process.env.REACT_APP_SOFkey}`);
+  
+  function toTimestamp(strDate) {
+    const datum = Date.parse(strDate);
+    return datum / 1000;
+  }
   
   const indexOfLastPage = activePage * forksPerPage;
   const indexOfFirstPage = indexOfLastPage - forksPerPage;
-  console.log( selectedDateFrom, selectedDateTo);
+  
   return (
     <main>
       <Input setSearch={setSearch}/>
