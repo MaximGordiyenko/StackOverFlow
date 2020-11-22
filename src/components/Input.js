@@ -4,6 +4,7 @@ import { inputStyles } from '../material-ui-style';
 
 const Input = ({setSearch}) => {
   const input = inputStyles()
+  
   return (
     <form className={input.root} noValidate autoComplete="off">
       <TextField id="standard-secondary"

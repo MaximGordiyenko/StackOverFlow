@@ -4,5 +4,5 @@ import reducer from "./reducer";
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
-export { store};
+export { store };
 
