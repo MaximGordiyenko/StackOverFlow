@@ -4,12 +4,14 @@ import useRequest from "../Hooks/useRequest";
 import Cards from "./Cards";
 import Input from "./Input";
 require('dotenv').config();
+import { useQueryParam, StringParam } from 'use-query-params';
 
 const Main = ({ order, sort, selectedDateFrom, selectedDateTo }) => {
   const forksPerPage = 25;
-  const [search, setSearch] = useState('js');
+  const [search, setSearch] = useQueryParam('search', StringParam);
+  
   const [activePage, setCurrentPage] = useState(1);
-  const { data, loading } = useRequest(`https://api.stackexchange.com/2.2/questions?fromdate=${toTimestamp(selectedDateFrom)}&todate=${toTimestamp(selectedDateTo)}&order=${order.value}&sort=${sort.value}&tagged=${search}&site=stackoverflow&key=${process.env.REACT_APP_SOFkey}`);
+  const { data, loading } = useRequest(`https://api.stackexchange.com/2.2/questions?fromdate=${toTimestamp(selectedDateFrom)}&todate=${toTimestamp(selectedDateTo)}&order=${order.value}&sort=${sort.value}&tagged=${search?.replace(',',';')}&site=stackoverflow&key=${process.env.REACT_APP_SOFkey}`);
   
   function toTimestamp(strDate) {
     const datum = Date.parse(strDate);
@@ -21,7 +23,7 @@ const Main = ({ order, sort, selectedDateFrom, selectedDateTo }) => {
   
   return (
     <main>
-      <Input setSearch={setSearch}/>
+      <Input value={search} setSearch={setSearch}/>
       {
         data.data.items &&
         Array.isArray(data.data.items) &&
