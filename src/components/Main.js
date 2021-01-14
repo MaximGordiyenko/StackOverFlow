@@ -11,6 +11,7 @@ const Main = ({ order, sort, selectedDateFrom, selectedDateTo }) => {
   const [search, setSearch] = useQueryParam('search', StringParam);
   
   const [activePage, setCurrentPage] = useState(1);
+  
   const { data, loading } = useRequest(`https://api.stackexchange.com/2.2/questions?fromdate=${toTimestamp(selectedDateFrom)}&todate=${toTimestamp(selectedDateTo)}&order=${order.value}&sort=${sort.value}&tagged=${search?.replace(',',';')}&site=stackoverflow&key=${process.env.REACT_APP_SOFkey}`);
   
   function toTimestamp(strDate) {

@@ -2,11 +2,8 @@ import React, { useContext } from 'react';
 import { Card, CardContent, CardMedia, Grid, Link, Typography } from '@material-ui/core';
 import { cardsStyles, gridStyle } from "../material-ui-style";
 import { Assessment, PermContactCalendar, QuestionAnswer } from '@material-ui/icons';
-import DataContext from '../App';
 
 const Cards = ({ item }) => {
-  const f = useContext(DataContext);
-  console.log(f);
   const grid = gridStyle();
   const cards = cardsStyles();
   return (
@@ -41,8 +38,6 @@ const Cards = ({ item }) => {
                   ))}
                   </div>
                 </Link>
-                <time>from: {f}</time>
-                {/*<time>to: {selectedDateTo}</time>*/}
               </CardContent>
             </div>
             <CardMedia
